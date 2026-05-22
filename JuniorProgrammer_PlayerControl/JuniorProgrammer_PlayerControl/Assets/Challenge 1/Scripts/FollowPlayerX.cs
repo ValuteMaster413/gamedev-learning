@@ -1,12 +1,13 @@
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class FollowPlayer : MonoBehaviour
+public class FollowPlayerX : MonoBehaviour
 {
     public GameObject player;
-    //camera position relative to followed object
     public Vector3 offset;
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    // Start is called before the first frame update
     void Start()
     {
         transform.position = player.transform.position + offset;
