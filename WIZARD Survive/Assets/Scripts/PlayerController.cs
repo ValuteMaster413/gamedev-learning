@@ -4,6 +4,11 @@ public class PlayerController : MonoBehaviour
 {
     private float _horizontalInput;
     private float _verticalInput;
+
+    public int uberSpellCount = 0;
+    public int blueSpellCount = 0;
+    public int redSpellCount = 0;
+    public int greenSpellCount = 0;
     
     public float speed = 1;
     public float xPos = 15;
@@ -21,8 +26,7 @@ public class PlayerController : MonoBehaviour
         _horizontalInput =  Input.GetAxis("Horizontal");
         _verticalInput =  Input.GetAxis("Vertical");
         
-        Vector3 move = new Vector3(_horizontalInput, 0, _verticalInput);
-        move = move.normalized;
+        Vector3 move = new Vector3(_horizontalInput, 0, _verticalInput).normalized;
 
         transform.Translate(move * (speed * Time.deltaTime));
         
@@ -32,5 +36,23 @@ public class PlayerController : MonoBehaviour
         pos.z = Mathf.Clamp(pos.z, -zPos, zPos);
         
         transform.position = pos;
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("BlueSpell"))
+        {
+            blueSpellCount += 2;
+        }
+
+        if (collision.gameObject.CompareTag("RedSpell"))
+        {
+            redSpellCount += 2;
+        }
+
+        if (collision.gameObject.CompareTag("GreenSpell"))
+        {
+            greenSpellCount += 2;
+        }
     }
 }
