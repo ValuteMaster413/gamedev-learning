@@ -17,6 +17,7 @@ public class SpawnManager : MonoBehaviour
     public GameObject titleScreen;
     public GameObject gameOverScreen;
     public GameObject infoScreen;
+    public GameObject spellCountScreen;
     public Button startButton;
     public Button restartButton;
     public GameObject _player;
@@ -33,7 +34,6 @@ public class SpawnManager : MonoBehaviour
     private int _enemyCount = 0;
     private int _score = 0;
     public bool isGameActive = false;
-    
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -55,8 +55,9 @@ public class SpawnManager : MonoBehaviour
     {
         titleScreen.SetActive(false);
         infoScreen.SetActive(true);
-        Instantiate(_player, new Vector3(0, 0.5f, 0), _player.transform.rotation);
-        _playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        spellCountScreen.SetActive(true);
+        GameObject player = Instantiate(_player, new Vector3(0, 0.5f, 0), _player.transform.rotation);
+        _playerController = player.GetComponent<PlayerController>();
         isGameActive = true;
         StartCoroutine(SpawnTargets());
         
@@ -77,19 +78,19 @@ public class SpawnManager : MonoBehaviour
     {
         if (spellToUpdate == 0)
         {
-            infoScreen.transform.Find("BlueSpellCounter").GetComponent<TextMeshProUGUI>().text = "Blue Spells: " + _playerController.blueSpellCount;
+            spellCountScreen.transform.Find("BlueSpellCounter").GetComponent<TextMeshProUGUI>().text = "Blue Spells: " + _playerController.blueSpellCount;
         }
         else if (spellToUpdate == 1)
         {
-            infoScreen.transform.Find("GreenSpellCounter").GetComponent<TextMeshProUGUI>().text = "Green Spells: " + _playerController.greenSpellCount;
+            spellCountScreen.transform.Find("GreenSpellCounter").GetComponent<TextMeshProUGUI>().text = "Green Spells: " + _playerController.greenSpellCount;
         }
         else if (spellToUpdate == 2)
         {
-            infoScreen.transform.Find("RedSpellCounter").GetComponent<TextMeshProUGUI>().text = "Red Spells:" + _playerController.redSpellCount;
+            spellCountScreen.transform.Find("RedSpellCounter").GetComponent<TextMeshProUGUI>().text = "Red Spells:" + _playerController.redSpellCount;
         }
         else if (spellToUpdate == 3)
         {
-            infoScreen.transform.Find("UberSpellCounter").GetComponent<TextMeshProUGUI>().text = "Uber Spells: " + _playerController.uberSpellCount;
+            spellCountScreen.transform.Find("UberSpellCounter").GetComponent<TextMeshProUGUI>().text = "Uber Spells: " + _playerController.uberSpellCount;
         }
     }
     
@@ -102,7 +103,6 @@ public class SpawnManager : MonoBehaviour
     {
         for (int i = 0; i < enemyToSpawn; i++)
         {
-            
             Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)], GenerateSpawnPos(), Quaternion.identity);
         }
     }
@@ -148,6 +148,7 @@ public class SpawnManager : MonoBehaviour
         
         gameOverScreen.SetActive(true);
         infoScreen.SetActive(false);
+        spellCountScreen.SetActive(false);
         restartButton.onClick.AddListener(RestartGame);
         StopAllCoroutines();
     }

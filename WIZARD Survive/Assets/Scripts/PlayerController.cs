@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     private AudioSource _audioSource;
     
     public GameObject infoScreen;
+    public GameObject spellCountScreen;
     public AudioClip castSound;
     public AudioClip damageSound;
     public AudioClip deadSound;
@@ -36,12 +37,14 @@ public class PlayerController : MonoBehaviour
         _animator = GetComponentInChildren<Animator>();
         _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         infoScreen = GameObject.Find("InfoScreen");
+        spellCountScreen  = GameObject.Find("SpellCountScreen");
         _audioSource = GetComponent<AudioSource>();
-        infoScreen.transform.Find("BlueSpellCounter").GetComponent<TMP_Text>().fontMaterial.SetFloat("_OutlineWidth", 0f);
-        infoScreen.transform.Find("GreenSpellCounter").GetComponent<TMP_Text>().fontMaterial.SetFloat("_OutlineWidth", 0f);
-        infoScreen.transform.Find("RedSpellCounter").GetComponent<TMP_Text>().fontMaterial.SetFloat("_OutlineWidth", 0f);
-        infoScreen.transform.Find("UberSpellCounter").GetComponent<TMP_Text>().fontMaterial.SetFloat("_OutlineWidth", 0f);
-        infoScreen.transform.Find("BlueSpellCounter").GetComponent<TMP_Text>().fontMaterial.SetFloat("_OutlineWidth", 0.3f);
+        
+        spellCountScreen.transform.Find("BlueSpellCounter").GetComponent<TMP_Text>().fontMaterial.SetFloat("_OutlineWidth", 0f);
+        spellCountScreen.transform.Find("GreenSpellCounter").GetComponent<TMP_Text>().fontMaterial.SetFloat("_OutlineWidth", 0f);
+        spellCountScreen.transform.Find("RedSpellCounter").GetComponent<TMP_Text>().fontMaterial.SetFloat("_OutlineWidth", 0f);
+        spellCountScreen.transform.Find("UberSpellCounter").GetComponent<TMP_Text>().fontMaterial.SetFloat("_OutlineWidth", 0f);
+        spellCountScreen.transform.Find("BlueSpellCounter").GetComponent<TMP_Text>().fontMaterial.SetFloat("_OutlineWidth", 0.3f);
 
     }
 
@@ -134,7 +137,6 @@ public class PlayerController : MonoBehaviour
             
             projectile.transform.Find("Gem").gameObject.SetActive(false);
             projectile.transform.Find("Particle").gameObject.SetActive(true);
-            Debug.Log(projectile.gameObject.name);
             if (_selectedSpell == 3)
             {
                 projectile.transform.Find("Particle1").gameObject.SetActive(true);
@@ -280,24 +282,24 @@ public class PlayerController : MonoBehaviour
     
     void UpdateSelectedUI(int selected)
     {
-        infoScreen.transform.Find("BlueSpellCounter").GetComponent<TMP_Text>().fontMaterial.SetFloat("_OutlineWidth", 0f);
-        infoScreen.transform.Find("GreenSpellCounter").GetComponent<TMP_Text>().fontMaterial.SetFloat("_OutlineWidth", 0f);
-        infoScreen.transform.Find("RedSpellCounter").GetComponent<TMP_Text>().fontMaterial.SetFloat("_OutlineWidth", 0f);
-        infoScreen.transform.Find("UberSpellCounter").GetComponent<TMP_Text>().fontMaterial.SetFloat("_OutlineWidth", 0f);
+        spellCountScreen.transform.Find("BlueSpellCounter").GetComponent<TMP_Text>().fontMaterial.SetFloat("_OutlineWidth", 0f);
+        spellCountScreen.transform.Find("GreenSpellCounter").GetComponent<TMP_Text>().fontMaterial.SetFloat("_OutlineWidth", 0f);
+        spellCountScreen.transform.Find("RedSpellCounter").GetComponent<TMP_Text>().fontMaterial.SetFloat("_OutlineWidth", 0f);
+        spellCountScreen.transform.Find("UberSpellCounter").GetComponent<TMP_Text>().fontMaterial.SetFloat("_OutlineWidth", 0f);
         
         switch (selected)
         {
             case 0:
-                infoScreen.transform.Find("BlueSpellCounter").GetComponent<TMP_Text>().fontMaterial.SetFloat("_OutlineWidth", 0.3f);
+                spellCountScreen.transform.Find("BlueSpellCounter").GetComponent<TMP_Text>().fontMaterial.SetFloat("_OutlineWidth", 0.3f);
                 break;
             case 1:
-                infoScreen.transform.Find("GreenSpellCounter").GetComponent<TMP_Text>().fontMaterial.SetFloat("_OutlineWidth", 0.3f);
+                spellCountScreen.transform.Find("GreenSpellCounter").GetComponent<TMP_Text>().fontMaterial.SetFloat("_OutlineWidth", 0.3f);
                 break;
             case 2:
-                infoScreen.transform.Find("RedSpellCounter").GetComponent<TMP_Text>().fontMaterial.SetFloat("_OutlineWidth", 0.3f);
+                spellCountScreen.transform.Find("RedSpellCounter").GetComponent<TMP_Text>().fontMaterial.SetFloat("_OutlineWidth", 0.3f);
                 break;
             case 3:
-                infoScreen.transform.Find("UberSpellCounter").GetComponent<TMP_Text>().fontMaterial.SetFloat("_OutlineWidth", 0.3f);
+                spellCountScreen.transform.Find("UberSpellCounter").GetComponent<TMP_Text>().fontMaterial.SetFloat("_OutlineWidth", 0.3f);
                 break;
         }
     }
